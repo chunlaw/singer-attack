@@ -4,7 +4,6 @@ import App from "./App.tsx";
 import "./index.css";
 import { CssBaseline, ThemeProvider, createTheme } from "@mui/material";
 import { AppContextProvider } from "./context/AppContext.tsx";
-import Background from "./components/layouts/Background.tsx";
 import { BoardContextProvider } from "./context/BoardContext.tsx";
 
 const theme = createTheme({
@@ -19,7 +18,6 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
       <BoardContextProvider>
         <AppContextProvider>
           <CssBaseline />
-          <Background />
           <App />
         </AppContextProvider>
       </BoardContextProvider>

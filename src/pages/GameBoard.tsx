@@ -60,8 +60,8 @@ const boardSx: SxProps<Theme> = {
 };
 
 const cellSx: SxProps<Theme> = {
-  width: 30,
-  height: 30,
+  width: 40,
+  height: 40,
   borderWidth: 0.25,
   borderColor: "rgba(0, 0, 0, 1)",
   borderStyle: "dashed",
@@ -70,21 +70,33 @@ const cellSx: SxProps<Theme> = {
   justifyContent: "center",
   bgcolor: "rgba(255, 255, 255, 0.4)",
   position: "relative",
+  "@media (width <= 420px)": {
+    width: 25,
+    height: 25,
+  },
 };
 
 const cannonSx: SxProps<Theme> = {
   backgroundImage: "url(/assets/weapon.png)",
   backgroundSize: "contain",
-  width: 30,
-  height: 30,
+  width: 40,
+  height: 40,
+  "@media (width <= 420px)": {
+    width: 25,
+    height: 25,
+  },
   cursor: "pointer",
 };
 
 const hCannonSx: SxProps<Theme> = {
   backgroundImage: "url(/assets/weapon.png)",
   backgroundSize: "contain",
-  width: 30,
-  height: 30,
+  width: 40,
+  height: 40,
+  "@media (width <= 420px)": {
+    width: 25,
+    height: 25,
+  },
   transform: "rotate(90deg)",
   cursor: "pointer",
 };

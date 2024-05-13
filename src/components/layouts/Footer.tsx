@@ -1,19 +1,20 @@
 import { Box, IconButton, SxProps, Theme } from "@mui/material";
-import FoundationIcon from '@mui/icons-material/Foundation';
+import { AccountBalance as AccountBalanceIcon } from "@mui/icons-material";
 import { useContext } from "react";
 import AppContext from "../../context/AppContext";
+import StageDialog from "../StageDialog";
+import WinDialog from "../WinDialog";
 
 const Footer = () => {
-  // const {  } = useContext(AppContext)
+  const { toggleDialog } = useContext(AppContext);
 
   return (
     <Box sx={rootSx}>
-      <IconButton
-        onClick={() => {}}
-        size="small"
-      >
-        <FoundationIcon />
+      <IconButton onClick={toggleDialog} size="large">
+        <AccountBalanceIcon sx={{ fontSize: 48 }} />
       </IconButton>
+      <StageDialog />
+      <WinDialog />
     </Box>
   );
 };

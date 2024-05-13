@@ -11,12 +11,18 @@ import BoardContext from "./BoardContext";
 
 interface AppContextState {
   stage: number;
-  stageCount: Array<number | undefined>;
+  curCnt: number;
+  stageCount: Array<number | null>;
+  isDialog: boolean;
+  isWinDialog: boolean;
 }
 
 interface AppContextValue extends AppContextState {
   remainingShots: number;
   fireCannon: (idx: number, ori: "x" | "y") => void;
+  toggleDialog: () => void;
+  setWinDialog: (open: boolean) => void;
+  goToStage: (id: number) => void;
 }
 
 const AppContext = React.createContext({} as AppContextValue);
@@ -34,65 +40,96 @@ export const AppContextProvider = ({ children }: { children: ReactNode }) => {
       stages.reduce((acc, { ans }, idx) => {
         acc += ans - (state.stageCount[idx] ?? 0);
         return acc;
-      }, 0),
-    [state.stageCount]
+      }, 0) - state.curCnt,
+    [state.stageCount, state.curCnt]
   );
 
   const fireCannon = useCallback(
     (idx: number, ori: "x" | "y") => {
       if (remainingShots) {
         fire(idx, ori);
-        setState((prev) => {
-          const stageCount = JSON.parse(JSON.stringify(prev.stageCount));
-          if (stageCount[prev.stage] === undefined) stageCount[prev.stage] = 0;
-          stageCount[prev.stage] += 1;
-          return {
-            ...prev,
-            stageCount,
-          };
-        });
+        setState((prev) => ({
+          ...prev,
+          curCnt: prev.curCnt + 1,
+        }));
       }
     },
     [remainingShots, fire]
   );
 
+  const toggleDialog = useCallback(() => {
+    setState((prev) => ({
+      ...prev,
+      isDialog: !prev.isDialog,
+    }));
+  }, []);
+
+  const setWinDialog = useCallback((open: boolean) => {
+    setState((prev) => ({
+      ...prev,
+      isWinDialog: open,
+    }));
+  }, []);
+
+  const goToStage = useCallback(
+    (id: number) => {
+      if (id === 0 || state.stageCount[id - 1] !== null) {
+        setState((prev) => ({
+          ...prev,
+          stage: id,
+        }));
+      }
+    },
+    [state.stageCount]
+  );
+
   useEffect(() => {
-    if (isClear && state.stage + 1 < stages.length) {
+    if (isClear && state.curCnt) {
+      setState((prev) => {
+        const _stageCount = JSON.parse(JSON.stringify(prev.stageCount));
+        if (
+          _stageCount[prev.stage] === null ||
+          prev.curCnt < _stageCount[prev.stage]
+        ) {
+          _stageCount[prev.stage] = prev.curCnt;
+        }
+        return {
+          ...prev,
+          stageCount: _stageCount,
+          isWinDialog: true,
+        };
+      });
+    }
+  }, [isClear, setBoard, state.curCnt]);
+
+  useEffect(() => {
+    if (state.stage < stages.length && state.isWinDialog === false) {
+      setBoard(stages[state.stage].board.map((r) => r.map((v) => v === 1)));
       setState((prev) => ({
         ...prev,
-        stage: prev.stage + 1,
+        curCnt: 0,
       }));
     }
-  }, [isClear, setBoard, state.stage]);
+  }, [state.stage, setBoard, state.isWinDialog]);
 
   useEffect(() => {
     localStorage.setItem("state", JSON.stringify(state));
   }, [state]);
 
-  useEffect(() => {
-    if (state.stage < stages.length) {
-      setBoard(stages[state.stage].board.map((r) => r.map((v) => v === 1)));
-      setState((prev) => {
-        const stageCount = JSON.parse(JSON.stringify(prev.stageCount));
-        stageCount[prev.stage] = 0;
-        return {
-          ...prev,
-          stageCount,
-        };
-      });
-    }
-  }, [state.stage, setBoard]);
+  const contextValue = useMemo<AppContextValue>(
+    () => ({
+      ...state,
+      remainingShots,
+      fireCannon,
+      toggleDialog,
+      goToStage,
+      setWinDialog,
+    }),
+    [state, remainingShots, fireCannon, toggleDialog, setWinDialog, goToStage]
+  );
 
   return (
-    <AppContext.Provider
-      value={{
-        ...state,
-        remainingShots,
-        fireCannon,
-      }}
-    >
-      {children}
-    </AppContext.Provider>
+    <AppContext.Provider value={contextValue}>{children}</AppContext.Provider>
   );
 };
 
@@ -100,5 +137,8 @@ export default AppContext;
 
 const DEFAULT_STATE: AppContextState = {
   stage: 0,
-  stageCount: stages.map(() => undefined),
+  curCnt: 0,
+  stageCount: stages.map(() => null),
+  isDialog: true,
+  isWinDialog: false,
 };

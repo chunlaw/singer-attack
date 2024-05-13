@@ -2,10 +2,12 @@ import { Container, SxProps, Theme } from "@mui/material";
 import { Outlet } from "react-router-dom";
 import Header from "./Header";
 import Footer from "./Footer";
+import Background from "./Background";
 
 const Layout = () => {
   return (
     <Container fixed maxWidth="xl" sx={rootSx}>
+      <Background />
       <Header />
       <Outlet />
       <Footer />
@@ -22,6 +24,5 @@ const rootSx: SxProps<Theme> = {
   flexDirection: "column",
   justifyContent: "space-between",
   alignItems: "center",
-  py: 1,
   px: 2,
 };

@@ -20,7 +20,9 @@ const Background = () => {
       <Box sx={{ ...spaceSx, ...star1Sx } as SxProps<Theme>} />
       <Box sx={{ ...spaceSx, ...star2Sx } as SxProps<Theme>} />
       <Box sx={{ ...spaceSx, ...star3Sx } as SxProps<Theme>} />
-      <Box sx={earthSx} />
+      <Box sx={earthContainerSx}>
+        <Box sx={earthSx} />
+      </Box>
     </Box>
   );
 };
@@ -90,18 +92,24 @@ const star3Sx: SxProps<Theme> = {
     "radial-gradient(2.5px 2.5px at 95px 145px, white, rgba(255, 255, 255, 0))",
 };
 
-const earthSx: SxProps<Theme> = {
+const earthContainerSx: SxProps<Theme> = {
   position: "absolute",
   bottom: "-80%",
   left: 0,
   right: 0,
   width: "100%",
   height: "100%",
+};
+
+const earthSx: SxProps<Theme> = {
+  height: "min(100vh, 100vw)",
+  width: "min(100vh, 100vw)",
   backgroundPositionX: "50%",
   backgroundRepeat: "no-repeat",
   backgroundSize: "contain",
   backgroundImage: "url(/assets/background/earth.png)",
-  animation: "earth-rotate 1200s ease-in-out infinite",
+  margin: "0 auto",
+  animation: "earth-rotate 900s linear infinite",
   "@keyframes earth-rotate": {
     "100%": {
       transform: "rotate(-360deg)",
