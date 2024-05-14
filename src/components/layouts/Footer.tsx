@@ -2,8 +2,8 @@ import { Box, IconButton, SxProps, Theme } from "@mui/material";
 import { AccountBalance as AccountBalanceIcon } from "@mui/icons-material";
 import { useContext } from "react";
 import AppContext from "../../context/AppContext";
-import StageDialog from "../StageDialog";
 import WinDialog from "../WinDialog";
+import StageDialog from "../StageDialog";
 
 const Footer = () => {
   const { toggleDialog } = useContext(AppContext);

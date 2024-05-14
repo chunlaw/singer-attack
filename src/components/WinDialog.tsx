@@ -7,7 +7,6 @@ import {
   DialogTitle,
   SxProps,
   Theme,
-  Typography,
 } from "@mui/material";
 import { useCallback, useContext, useMemo } from "react";
 import AppContext from "../context/AppContext";
@@ -22,22 +21,25 @@ import {
 
 const WinDialog = () => {
   const { isClear } = useContext(BoardContext);
-  const { isWinDialog, stage, curCnt, setWinDialog, goToStage } =
+  const { isWinDialog, stage, stageCount, setWinDialog, goToStage } =
     useContext(AppContext);
 
   const rating = useMemo(() => {
     if (!isClear) return 0;
-    if (stages[stage].ans === curCnt) {
+    const curBest = stageCount[stage];
+    if (curBest === null) return 0;
+    console.log(stageCount[stage], stages[stage].ans);
+    if (stages[stage].ans === curBest) {
       return 3;
     }
-    if (stages[stage].ans === curCnt + 1) {
+    if (stages[stage].ans === curBest + 1) {
       return 2;
     }
-    if (stages[stage].ans === curCnt + 2) {
+    if (stages[stage].ans === curBest + 2) {
       return 1;
     }
     return 0;
-  }, [curCnt, isClear, stage]);
+  }, [stageCount, isClear, stage]);
 
   const handleReset = useCallback(() => {
     setWinDialog(false);
@@ -50,10 +52,8 @@ const WinDialog = () => {
 
   return (
     <Dialog open={isWinDialog}>
-      <DialogTitle>
-        <Typography variant="h4" sx={{ textAlign: "center" }}>
-          Wave {stage + 1}
-        </Typography>
+      <DialogTitle sx={{ textAlign: "center" }} variant="h4">
+        Wave {stage + 1}
       </DialogTitle>
       <DialogContent>
         <Box

@@ -42,8 +42,10 @@ const StageList = () => {
     <Box display="flex" width="100%" flexDirection="column" gap={2}>
       {ratings.map(([id, rating]) => (
         <Box key={id} sx={stageRowSx} onClick={handleRowClick(id)}>
-          <Typography variant="h6">Wave {id + 1}</Typography>
-          <Box display="flex" gap={1} color="yellow">
+          <Typography variant="h6" sx={{ flex: 1, textAlign: "right" }}>
+            Wave {id + 1}
+          </Typography>
+          <Box display="flex" gap={1} color="yellow" flex={1}>
             {rating >= 1 ? <StarIcon /> : <StarBorderIcon />}
             {rating >= 2 ? <StarIcon /> : <StarBorderIcon />}
             {rating === 3 ? <StarIcon /> : <StarBorderIcon />}
