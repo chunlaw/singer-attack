@@ -16,6 +16,7 @@ import {
 } from "@mui/icons-material";
 import { useCallback, useContext } from "react";
 import AppContext from "../context/AppContext";
+import { useNavigate } from "react-router-dom";
 
 const Settings = () => {
   const {
@@ -26,12 +27,15 @@ const Settings = () => {
     soundConfig: { isBgMusic, bgVolume, isSoundEffect, soundEffectVolume },
   } = useContext(AppContext);
 
+  const navigate = useNavigate()
+
   const clean = useCallback(() => {
     if (window.confirm("Clean up?")) {
       localStorage.clear();
+      navigate("/")
       window.location.reload();
     }
-  }, []);
+  }, [navigate]);
 
   return (
     <Box display="flex" flexDirection="column" gap={4}>
