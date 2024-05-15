@@ -5,6 +5,7 @@ import Footer from "./Footer";
 import Background from "./Background";
 import { useContext } from "react";
 import AppContext from "../../context/AppContext";
+import StoryModal from "../../pages/StoryModal";
 
 const Layout = () => {
   const {
@@ -18,6 +19,7 @@ const Layout = () => {
       <Header />
       <Outlet />
       <Footer />
+      <StoryModal />
       {isSoundEffect && (
         <iframe
           id="sound-effect"

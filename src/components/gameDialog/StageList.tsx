@@ -6,9 +6,11 @@ import {
   StarBorder as StarBorderIcon,
 } from "@mui/icons-material";
 import stages from "../../stages.json";
+import { useNavigate } from "react-router-dom";
 
 const StageList = () => {
   const { stageCount, toggleDialog, goToStage } = useContext(AppContext);
+  const navigate = useNavigate();
 
   const ratings = useMemo(() => {
     return stageCount
@@ -21,7 +23,7 @@ const StageList = () => {
           return 3;
         } else if (v === stages[idx].ans + 1) {
           return 2;
-        } else if (v === stages[idx].ans + 2) {
+        } else if (v >= stages[idx].ans + 2) {
           return 1;
         }
         return 0;
@@ -32,10 +34,13 @@ const StageList = () => {
 
   const handleRowClick = useCallback(
     (id: number) => () => {
+      if (window.location.pathname !== "") {
+        navigate("/");
+      }
       goToStage(id);
       toggleDialog();
     },
-    [goToStage, toggleDialog]
+    [goToStage, toggleDialog, navigate]
   );
 
   return (

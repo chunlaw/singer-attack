@@ -18,24 +18,26 @@ import {
   RestartAlt as RestartAltIcon,
   NavigateNext as NextIcon,
 } from "@mui/icons-material";
+import { useMatch } from "react-router-dom";
 
 const WinDialog = () => {
   const { isClear } = useContext(BoardContext);
   const { isWinDialog, stage, stageCount, setWinDialog, goToStage } =
     useContext(AppContext);
+  const match = useMatch("/ending/:ending");
 
   const rating = useMemo(() => {
     if (!isClear) return 0;
     const curBest = stageCount[stage];
     if (curBest === null) return 0;
-    console.log(stageCount[stage], stages[stage].ans);
+
     if (stages[stage].ans === curBest) {
       return 3;
     }
     if (stages[stage].ans === curBest + 1) {
       return 2;
     }
-    if (stages[stage].ans === curBest + 2) {
+    if (stages[stage].ans >= curBest + 2) {
       return 1;
     }
     return 0;
@@ -51,7 +53,7 @@ const WinDialog = () => {
   }, [goToStage, setWinDialog, stage]);
 
   return (
-    <Dialog open={isWinDialog}>
+    <Dialog open={isWinDialog && match === null}>
       <DialogTitle sx={{ textAlign: "center" }} variant="h4">
         Wave {stage + 1}
       </DialogTitle>
@@ -74,7 +76,7 @@ const WinDialog = () => {
           variant="outlined"
           color="inherit"
         >
-          Reset
+          Retry
         </Button>
         {stage + 1 < stages.length && (
           <Button

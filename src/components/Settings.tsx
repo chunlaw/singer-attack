@@ -3,6 +3,7 @@ import {
   Button,
   Divider,
   IconButton,
+  Link,
   Slider,
   Typography,
 } from "@mui/material";
@@ -76,6 +77,17 @@ const Settings = () => {
           https://onsound.eu/ Music promoted by
           https://www.chosic.com/free-music/all/ Creative Commons CC BY 3.0
           https://creativecommons.org/licenses/by/3.0/
+        </Typography>
+        <br />
+        <Typography variant="caption" color="GrayText">
+          Character Artwork by &nbsp;
+          <Link
+            href="https://linktr.ee/coraxdigitalart"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Corax Digital Art
+          </Link>
         </Typography>
       </Box>
     </Box>

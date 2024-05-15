@@ -13,11 +13,10 @@ import AppContext from "../context/AppContext";
 import { Close as CloseIcon } from "@mui/icons-material";
 import StageList from "./gameDialog/StageList";
 import Settings from "./Settings";
-import Story from "./Story";
 
 const StageDialog = () => {
   const { isDialog, toggleDialog } = useContext(AppContext);
-  const [tab, setTab] = useState<"story" | "stage" | "settings">("story");
+  const [tab, setTab] = useState<"stage" | "settings">("stage");
 
   return (
     <Dialog open={isDialog} fullWidth>
@@ -37,13 +36,11 @@ const StageDialog = () => {
             exclusive
             onChange={(_, v) => setTab(v)}
           >
-            <ToggleButton value="story">Story</ToggleButton>
             <ToggleButton value="stage">Stage</ToggleButton>
             <ToggleButton value="settings">Settings</ToggleButton>
           </ToggleButtonGroup>
         </Box>
         <Box flex={2} overflow="scroll">
-          {tab === "story" && <Story />}
           {tab === "stage" && <StageList />}
           {tab === "settings" && <Settings />}
         </Box>

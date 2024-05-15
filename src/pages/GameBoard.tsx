@@ -4,10 +4,13 @@ import Meteorite from "../components/board/Meteorite";
 import Fire from "../components/board/Fire";
 import BoardContext from "../context/BoardContext";
 import AppContext from "../context/AppContext";
+import Starship from "../components/board/Starship";
+import StoryContext from "../context/StoryContext";
 
 const GameBoard = () => {
   const { board, toggleBoard } = useContext(BoardContext);
   const { fireCannon } = useContext(AppContext);
+  const { isStarship } = useContext(StoryContext);
 
   const handleClick = useCallback(
     (x: number, y: number) => () => {
@@ -27,7 +30,8 @@ const GameBoard = () => {
           />
           {row.map((cell, j) => (
             <Box sx={cellSx} key={`cell-${i}-${j}`} onClick={handleClick(i, j)}>
-              <Meteorite isVisible={cell} />
+              <Meteorite isVisible={!isStarship && cell} />
+              <Starship isVisible={isStarship && cell} />
               <Fire x={i} y={j} />
             </Box>
           ))}

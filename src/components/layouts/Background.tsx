@@ -1,10 +1,32 @@
 import { Box, SxProps, Theme } from "@mui/material";
-import { useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { useMatch } from "react-router-dom";
 
 const Background = () => {
+  const isNewWorld = useMatch("/ending/new-world");
+  const isDestroyed = useMatch("/ending/new-world");
+  const [isHell, setIsHell] = useState<boolean>(false);
+
   const random = useMemo(() => {
     return Math.floor(Math.random() * 439);
   }, []);
+
+  useEffect(() => {
+    if (isNewWorld === null && isDestroyed === null) {
+      setIsHell(false);
+      return;
+    }
+    const timer = setTimeout(
+      () => {
+        setIsHell(true);
+      },
+      isDestroyed === null ? 3000 : 20000
+    );
+
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [isNewWorld, isDestroyed]);
 
   return (
     <Box
@@ -21,7 +43,12 @@ const Background = () => {
       <Box sx={{ ...spaceSx, ...star2Sx } as SxProps<Theme>} />
       <Box sx={{ ...spaceSx, ...star3Sx } as SxProps<Theme>} />
       <Box sx={earthContainerSx}>
-        <Box sx={earthSx} />
+        <Box
+          sx={{
+            ...earthSx,
+            animation: `${isHell ? "earth-rotate-fade 900s linear 1" : "earth-rotate 900s linear infinite"}`,
+          }}
+        />
       </Box>
     </Box>
   );
@@ -109,10 +136,18 @@ const earthSx: SxProps<Theme> = {
   backgroundSize: "contain",
   backgroundImage: "url(/assets/background/earth.png)",
   margin: "0 auto",
-  animation: "earth-rotate 900s linear infinite",
   "@keyframes earth-rotate": {
     "100%": {
       transform: "rotate(-360deg)",
+    },
+  },
+  "@keyframes earth-rotate-fade": {
+    "2%": {
+      opacity: 0,
+    },
+    "100%": {
+      transform: "rotate(-360deg)",
+      opacity: 0,
     },
   },
 };
