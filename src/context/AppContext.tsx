@@ -250,7 +250,7 @@ const DEFAULT_STATE: AppContextState = {
   stage: 0,
   curCnt: 0,
   stageCount: stages.map(() => null),
-  isDialog: true,
+  isDialog: false,
   isWinDialog: false,
   soundConfig: {
     isBgMusic: true,
