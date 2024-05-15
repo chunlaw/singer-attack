@@ -87,7 +87,7 @@ export const StoryContextProvider = ({ children }: { children: ReactNode }) => {
         prefix = "secure/";
       }
     }
-    if (window.location.pathname === "") {
+    if (window.location.pathname === "/") {
       // not in ending
       fetch(
         `/assets/dialogues/${prefix}stage${`${stage + 1}`.padStart(2, "0")}.md`
