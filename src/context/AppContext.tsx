@@ -12,6 +12,7 @@ import BoardContext from "./BoardContext";
 
 interface AppContextState {
   stage: number;
+  stageState: "init" | "story" | "playing" | "ending";
   curCnt: number;
   stageCount: Array<number | null>;
   isDialog: boolean;
@@ -28,9 +29,9 @@ interface AppContextValue extends AppContextState {
   remainingShots: number;
   bgIframe: React.RefObject<HTMLIFrameElement>;
   soundIframe: React.RefObject<HTMLIFrameElement>;
+  nextStageState: () => void;
   fireCannon: (idx: number, ori: "x" | "y") => void;
   toggleDialog: () => void;
-  setWinDialog: (open: boolean) => void;
   goToStage: (id: number) => void;
   toggleBgMusic: () => void;
   setBgVolume: (v: number) => void;
@@ -63,6 +64,23 @@ export const AppContextProvider = ({ children }: { children: ReactNode }) => {
     [state.stageCount, state.stage, state.curCnt, state.isWinDialog]
   );
 
+  const nextStageState = useCallback(() => {
+    setState((prev) => {
+      let stageState: AppContextState["stageState"] = "init";
+      if (prev.stageState === "init") {
+        stageState = "story";
+      } else if (prev.stageState === "story") {
+        stageState = "playing";
+      } else if (prev.stageState === "playing") {
+        stageState = "ending";
+      }
+      return {
+        ...prev,
+        stageState,
+      };
+    });
+  }, []);
+
   const fireCannon = useCallback(
     (idx: number, ori: "x" | "y") => {
       if (remainingShots) {
@@ -88,19 +106,16 @@ export const AppContextProvider = ({ children }: { children: ReactNode }) => {
     }));
   }, []);
 
-  const setWinDialog = useCallback((open: boolean) => {
-    setState((prev) => ({
-      ...prev,
-      isWinDialog: open,
-    }));
-  }, []);
-
   const goToStage = useCallback(
     (id: number) => {
       if (id === 0 || state.stageCount[id - 1] !== null) {
         setState((prev) => ({
           ...prev,
           stage: id,
+          stageState: "init",
+          curCnt: 0,
+          isDialog: false,
+          isWinDialog: false,
         }));
       }
     },
@@ -188,17 +203,12 @@ export const AppContextProvider = ({ children }: { children: ReactNode }) => {
           ...prev,
           stageCount: _stageCount,
           curCnt: 0,
+          stageState: "ending",
           isWinDialog: true,
         };
       });
     }
-  }, [isClear, setBoard, state.curCnt]);
-
-  useEffect(() => {
-    if (state.stage < stages.length && state.isWinDialog === false) {
-      setBoard(stages[state.stage].board.map((r) => r.map((v) => v === 1)));
-    }
-  }, [state.stage, setBoard, state.isWinDialog]);
+  }, [isClear, state.curCnt]);
 
   useEffect(() => {
     let video =
@@ -210,16 +220,26 @@ export const AppContextProvider = ({ children }: { children: ReactNode }) => {
     localStorage.setItem("state", JSON.stringify(state));
   }, [state]);
 
+  useEffect(() => {
+    if (state.stageState === "init") {
+      setBoard(stages[state.stage].board.map((r) => r.map((v) => v === 1)));
+      setState((prev) => ({
+        ...prev,
+        stageState: "story",
+      }));
+    }
+  }, [setBoard, state.stage, state.stageState]);
+
   const contextValue = useMemo<AppContextValue>(
     () => ({
       ...state,
       remainingShots,
       bgIframe,
       soundIframe,
+      nextStageState,
       fireCannon,
       toggleDialog,
       goToStage,
-      setWinDialog,
       toggleBgMusic,
       setBgVolume,
       toggleSoundEffect,
@@ -228,10 +248,10 @@ export const AppContextProvider = ({ children }: { children: ReactNode }) => {
     [
       state,
       remainingShots,
+      nextStageState,
       fireCannon,
       toggleDialog,
       goToStage,
-      setWinDialog,
       toggleBgMusic,
       setBgVolume,
       toggleSoundEffect,
@@ -248,6 +268,7 @@ export default AppContext;
 
 const DEFAULT_STATE: AppContextState = {
   stage: 0,
+  stageState: "init",
   curCnt: 0,
   stageCount: stages.map(() => null),
   isDialog: false,

@@ -33,7 +33,7 @@ It is actually no scientist lied, all scientist are killed by Saviour Me in the 
 ### Saviour Me
 <!-- __ALIGN_RIGHT__ -->
 
-Fuck!
+F...!
 
 <--->
 

@@ -21,5 +21,20 @@ Saviour Me, please cast your agreement.
 
 ### Saviour Me
 <!-- __ALIGN_RIGHT__ -->
+<!-- PROMPT is23: Do you support the enforcement of New Security Law to all 23 states? -->
 
 ...
+
+<--->
+
+### President Cress
+<!-- CONDITION is23 TRUE -->
+
+Frankly speaking, I am old. I count on you to carry on my Kingdom.
+
+<--->
+
+### President Cress
+<!-- CONDITION is23 FALSE -->
+
+Good to know it. You may state your stand in the media as a showcase of the freedom of speech.

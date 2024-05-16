@@ -20,6 +20,8 @@ There is a crisis of Euthica, it is now a state of emergency.
 
 The Peaceful Treaty is now revoked. President Cress is now legitimate to liberate Euthica.
 
+<--->
+
 ### President Cress
 
-Thank you. I will save the world.
+Thank you. I will save Euthica.

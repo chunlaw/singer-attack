@@ -2,18 +2,10 @@
 
 <!-- __ALIGN_RIGHT__ -->
 
-The political situation of Euthica is stable now. The children are speaking our language, dressing our clothes, worshiping you, and giving up their culture. 
+The Peace Treaty is working well. The children are speaking our language, dressing our clothes, worshiping our leader, and giving up their culture. 
 
 <--->
 
 ### President Cress
 
-Don't you think that our rejuvenation process is way too slow. Please do somethings.
-
-<--->
-
-### Representative of Cress in Euthica
-
-<!-- __ALIGN_RIGHT__ -->
-
-Got it, sir.
+Huh... Only children? Don't you think that our rejuvenation process is way too slow. Please do somethings.

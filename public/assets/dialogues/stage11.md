@@ -28,5 +28,22 @@ Saviour, do you stand by me?
 
 ### Saviour Me
 <!-- __ALIGN_RIGHT__ -->
+<!-- PROMPT securityLaw: Do you support the Earth Security Law? -->
 
 ......
+
+<--->
+
+### President Cress
+<!-- CONDITION securityLaw TRUE -->
+
+Saviour Me, you are in the right track of the history.
+
+<--->
+
+### President Cress
+<!-- CONDITION securityLaw FALSE -->
+
+Okay, well noted. (...who do you think you are?)
+
+<--->

@@ -9,7 +9,7 @@ import stages from "../../stages.json";
 import { useNavigate } from "react-router-dom";
 
 const StageList = () => {
-  const { stageCount, toggleDialog, goToStage } = useContext(AppContext);
+  const { stageCount, goToStage } = useContext(AppContext);
   const navigate = useNavigate();
 
   const ratings = useMemo(() => {
@@ -38,9 +38,8 @@ const StageList = () => {
         navigate("/");
       }
       goToStage(id);
-      toggleDialog();
     },
-    [goToStage, toggleDialog, navigate]
+    [goToStage, navigate]
   );
 
   return (

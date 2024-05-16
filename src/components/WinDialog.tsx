@@ -22,8 +22,7 @@ import { useMatch } from "react-router-dom";
 
 const WinDialog = () => {
   const { isClear } = useContext(BoardContext);
-  const { isWinDialog, stage, stageCount, setWinDialog, goToStage } =
-    useContext(AppContext);
+  const { isWinDialog, stage, stageCount, goToStage } = useContext(AppContext);
   const match = useMatch("/ending/:ending");
 
   const rating = useMemo(() => {
@@ -37,20 +36,19 @@ const WinDialog = () => {
     if (stages[stage].ans === curBest + 1) {
       return 2;
     }
-    if (stages[stage].ans >= curBest + 2) {
+    if (stages[stage].ans + 2 <= curBest) {
       return 1;
     }
     return 0;
   }, [stageCount, isClear, stage]);
 
   const handleReset = useCallback(() => {
-    setWinDialog(false);
-  }, [setWinDialog]);
+    goToStage(stage);
+  }, [goToStage, stage]);
 
   const handleNext = useCallback(() => {
     goToStage(stage + 1);
-    setWinDialog(false);
-  }, [goToStage, setWinDialog, stage]);
+  }, [goToStage, stage]);
 
   return (
     <Dialog open={isWinDialog && match === null}>

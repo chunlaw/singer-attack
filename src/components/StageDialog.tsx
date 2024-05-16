@@ -34,7 +34,9 @@ const StageDialog = () => {
             orientation="vertical"
             value={tab}
             exclusive
-            onChange={(_, v) => setTab(v)}
+            onChange={(_, v) => {
+              if (v) setTab(v);
+            }}
           >
             <ToggleButton value="stage">Stage</ToggleButton>
             <ToggleButton value="settings">Settings</ToggleButton>

@@ -25,7 +25,11 @@ interface BoardContextValue extends BoardContextState {
 const BoardContext = React.createContext({} as BoardContextValue);
 
 export const BoardContextProvider = ({ children }: { children: ReactNode }) => {
-  const [state, setState] = useState<BoardContextState>(DEFAULT_STATE);
+  const [state, setState] = useState<BoardContextState>(() => {
+    return JSON.parse(
+      localStorage.getItem("board") ?? JSON.stringify(DEFAULT_STATE)
+    );
+  });
 
   const isClear = useMemo(() => {
     for (let i = 0; i < state.board.length; ++i) {
@@ -96,6 +100,10 @@ export const BoardContextProvider = ({ children }: { children: ReactNode }) => {
       board,
     }));
   }, []);
+
+  useEffect(() => {
+    localStorage.setItem("board", JSON.stringify(state));
+  }, [state]);
 
   return (
     <BoardContext.Provider

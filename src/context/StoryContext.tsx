@@ -29,7 +29,8 @@ interface StoryContextValue extends StoryContextState {
 const StoryContext = React.createContext({} as StoryContextValue);
 
 export const StoryContextProvider = ({ children }: { children: ReactNode }) => {
-  const { stage, remainingShots } = useContext(AppContext);
+  const { stage, stageState, nextStageState, remainingShots } =
+    useContext(AppContext);
   const { isClear } = useContext(BoardContext);
   const [state, setState] = useState<StoryContextState>(() => {
     return JSON.parse(
@@ -39,11 +40,15 @@ export const StoryContextProvider = ({ children }: { children: ReactNode }) => {
   const navigate = useNavigate();
 
   const toggleIsDialogue = useCallback(() => {
+    if (state.isDialogue === true) {
+      nextStageState();
+    }
     setState((prev) => ({
       ...prev,
       isDialogue: !prev.isDialogue,
+      dialogues: [],
     }));
-  }, []);
+  }, [state.isDialogue, nextStageState]);
 
   const setSecurityLaw = useCallback((v: boolean) => {
     setState((prev) => ({ ...prev, isSecurityLaw: v }));
@@ -54,14 +59,8 @@ export const StoryContextProvider = ({ children }: { children: ReactNode }) => {
   }, []);
 
   const isStarship = useMemo(() => {
-    if (state.isSecurityLaw && [11, 13, 15].includes(stage)) {
-      return true;
-    }
-    if (state.is23 && [19].includes(stage)) {
-      return true;
-    }
-    return false;
-  }, [stage, state]);
+    return [11, 13, 15, 19].includes(stage);
+  }, [stage]);
 
   const setEndingDialogues = useCallback((dialoguesUrl: string) => {
     fetch(dialoguesUrl)
@@ -79,19 +78,9 @@ export const StoryContextProvider = ({ children }: { children: ReactNode }) => {
   }, []);
 
   useEffect(() => {
-    let prefix = "";
-    if (stage > 10) {
-      if (state.isSecurityLaw && state.is23) {
-        prefix = "secure/23/";
-      } else if (state.isSecurityLaw) {
-        prefix = "secure/";
-      }
-    }
-    if (window.location.pathname === "/") {
+    if (stageState === "story") {
       // not in ending
-      fetch(
-        `/assets/dialogues/${prefix}stage${`${stage + 1}`.padStart(2, "0")}.md`
-      )
+      fetch(`/assets/dialogues/stage${`${stage + 1}`.padStart(2, "0")}.md`)
         .then((r) => r.text())
         .then((r) => {
           setState((prev) => {
@@ -101,47 +90,16 @@ export const StoryContextProvider = ({ children }: { children: ReactNode }) => {
               .filter((v) => v);
             return {
               ...prev,
-              isDialogue:
-                JSON.stringify(prev.dialogues) !== JSON.stringify(_dialogues) ||
-                prev.isDialogue,
+              isDialogue: true,
               dialogues: _dialogues,
             };
           });
         });
     }
-  }, [stage, state.isSecurityLaw, state.is23]);
+  }, [stage, stageState, state.isSecurityLaw, state.is23]);
 
   useEffect(() => {
-    if (
-      stage === 10 &&
-      state.isDialogue === false &&
-      state.isSecurityLaw === null
-    ) {
-      confirm("Do you support the Earth Security Law?");
-      setSecurityLaw(true);
-    }
-    if (
-      stage === 17 &&
-      state.isDialogue === false &&
-      state.isSecurityLaw &&
-      state.is23 === null
-    ) {
-      confirm(
-        "Do you support the enforcement of New Security Law to all 23 states?"
-      );
-      setIs23(true);
-    }
-  }, [
-    state.isSecurityLaw,
-    stage,
-    state.isDialogue,
-    setSecurityLaw,
-    setIs23,
-    state.is23,
-  ]);
-
-  useEffect(() => {
-    if (remainingShots === 0) {
+    if (remainingShots === 0 && !window.location.pathname.includes("ending")) {
       if (!isClear) {
         if (isStarship) {
           navigate("/ending/new-world");
@@ -202,7 +160,7 @@ export const StoryContextProvider = ({ children }: { children: ReactNode }) => {
 export default StoryContext;
 
 const DEFAULT_STATE: StoryContextState = {
-  isDialogue: true,
+  isDialogue: false,
   isSecurityLaw: null,
   is23: null,
   dialogues: [],

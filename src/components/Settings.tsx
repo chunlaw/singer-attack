@@ -27,12 +27,12 @@ const Settings = () => {
     soundConfig: { isBgMusic, bgVolume, isSoundEffect, soundEffectVolume },
   } = useContext(AppContext);
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const clean = useCallback(() => {
     if (window.confirm("Clean up?")) {
       localStorage.clear();
-      navigate("/")
+      navigate("/");
       window.location.reload();
     }
   }, [navigate]);

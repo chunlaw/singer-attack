@@ -8,7 +8,7 @@ const Header = () => {
   const match = useMatch("/ending/:ending");
 
   return (
-    <Box>
+    <Box display="flex" gap={1}>
       {match === null && <Typography variant="h4">{remainingShots}</Typography>}
     </Box>
   );
