@@ -11,6 +11,7 @@ import {
   MusicNote as MusicNoteIcon,
   MusicOff as MusicOffIcon,
   DeleteOutline as DeleteOutlineIcon,
+  SecurityUpdate as SecurityUpdateIcon,
   VolumeOff as VolumeOffIcon,
   VolumeUp as VolumeUpIcon,
 } from "@mui/icons-material";
@@ -37,8 +38,24 @@ const Settings = () => {
     }
   }, [navigate]);
 
+  const updateGame = useCallback(() => {
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker
+        .register("/sw.js", { scope: "/" })
+        .then((registration) => {
+          // registration worked
+          registration.update();
+          window.location.reload();
+        })
+        .catch(() => {
+          // registration failed
+          console.error(`Not registrated`);
+        });
+    }
+  }, []);
+
   return (
-    <Box display="flex" flexDirection="column" gap={4}>
+    <Box display="flex" flexDirection="column" gap={2}>
       <Box display="flex" gap={1} pr={2} alignItems="center">
         <IconButton onClick={toggleBgMusic}>
           {isBgMusic ? <MusicNoteIcon /> : <MusicOffIcon />}
@@ -70,6 +87,14 @@ const Settings = () => {
         onClick={clean}
       >
         Clean Up Game Savings
+      </Button>
+      <Button
+        startIcon={<SecurityUpdateIcon />}
+        variant="outlined"
+        color="info"
+        onClick={updateGame}
+      >
+        Manually Update Game
       </Button>
       <Divider />
       <Box>

@@ -5,7 +5,8 @@ import Footer from "./Footer";
 import Background from "./Background";
 import { useContext } from "react";
 import AppContext from "../../context/AppContext";
-import StoryModal from "../../pages/StoryModal";
+import StoryContext, { charactersMap } from "../../context/StoryContext";
+import GameDialogue from "react-game-dialog";
 
 const Layout = () => {
   const {
@@ -13,13 +14,20 @@ const Layout = () => {
     soundIframe,
     soundConfig: { isBgMusic, isSoundEffect },
   } = useContext(AppContext);
+  const { isDialogue, toggleIsDialogue, dialogues } = useContext(StoryContext);
+
   return (
     <Container fixed maxWidth="xl" sx={rootSx}>
       <Background />
       <Header />
       <Outlet />
       <Footer />
-      <StoryModal />
+      <GameDialogue
+        open={isDialogue}
+        onClose={toggleIsDialogue}
+        dialogues={dialogues}
+        characterUrls={charactersMap}
+      />
       {isSoundEffect && (
         <iframe
           id="sound-effect"

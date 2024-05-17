@@ -7,7 +7,7 @@ import eslint from "vite-plugin-eslint";
 export default defineConfig(({mode}: ConfigEnv) => {
   const env = loadEnv(mode, process.cwd(), "");
   return {
-    plugins: [react(), eslint({})],
+    plugins: [react(), eslint({}), VitePWA(pwaOptions)],
     server: {
       host: true,
       // port: parseInt(env.PORT ?? "9100", 10),
@@ -19,14 +19,14 @@ export default defineConfig(({mode}: ConfigEnv) => {
 const pwaOptions: Partial<VitePWAOptions> = {
   mode: "development",
   base: "/",
-  includeAssets: ["vite.svg"], // as favicon.ico
+  includeAssets: ["assets/meteorite2.png"], // as favicon.ico
   manifest: {
-    name: 'Save the Earth',
+    name: 'Singer Attack',
     short_name: 'PWA',
     theme_color: '#ffffff',
     icons: [
       {
-        src: 'vite.svg',
+        src: 'assets/meteorite2.png',
         sizes: 'any',
         purpose: 'any',
         type: "image/svg+xml"
@@ -44,6 +44,18 @@ const pwaOptions: Partial<VitePWAOptions> = {
     runtimeCaching: [
       // for lazy caching anything
       // reference to https://vite-pwa-org.netlify.app/workbox/generate-sw.html#cache-external-resources 
+      {
+        urlPattern: ({url}) => (
+          url.origin === self.location.origin && url.pathname.startsWith("/assets")
+        ),
+        handler: "CacheFirst",
+        options: {
+          cacheName: "app-runtime",
+          cacheableResponse: {
+            statuses: [0, 200],
+          }
+        }
+      },
     ]
   }
 }

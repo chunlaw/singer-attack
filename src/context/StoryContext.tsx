@@ -62,20 +62,25 @@ export const StoryContextProvider = ({ children }: { children: ReactNode }) => {
     return [11, 13, 15, 19].includes(stage);
   }, [stage]);
 
-  const setEndingDialogues = useCallback((dialoguesUrl: string) => {
-    fetch(dialoguesUrl)
-      .then((r) => r.text())
-      .then((r) => {
-        setState((prev) => ({
-          ...prev,
-          isDialogue: true,
-          dialogues: r
-            .split("<--->")
-            .map((content) => content.trim())
-            .filter((v) => v),
-        }));
-      });
-  }, []);
+  const setEndingDialogues = useCallback(
+    (dialoguesUrl: string) => {
+      fetch(dialoguesUrl)
+        .then((r) => r.text())
+        .then((r) => {
+          setState((prev) => ({
+            ...prev,
+            isDialogue: true,
+            dialogues: r
+              .split("<--->")
+              .map((content) =>
+                content.trim().replace(/%SHOT%/gm, `${remainingShots}`)
+              )
+              .filter((v) => v),
+          }));
+        });
+    },
+    [remainingShots]
+  );
 
   useEffect(() => {
     if (stageState === "story") {
@@ -86,7 +91,9 @@ export const StoryContextProvider = ({ children }: { children: ReactNode }) => {
           setState((prev) => {
             const _dialogues = r
               .split("<--->")
-              .map((content) => content.trim())
+              .map((content) =>
+                content.trim().replace(/%SHOT%/gm, `${remainingShots}`)
+              )
               .filter((v) => v);
             return {
               ...prev,
@@ -96,7 +103,7 @@ export const StoryContextProvider = ({ children }: { children: ReactNode }) => {
           });
         });
     }
-  }, [stage, stageState, state.isSecurityLaw, state.is23]);
+  }, [stage, stageState, state.isSecurityLaw, state.is23, remainingShots]);
 
   useEffect(() => {
     if (remainingShots === 0 && !window.location.pathname.includes("ending")) {
