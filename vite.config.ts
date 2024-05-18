@@ -22,15 +22,22 @@ const pwaOptions: Partial<VitePWAOptions> = {
   includeAssets: ["assets/meteorite2.png"], // as favicon.ico
   manifest: {
     name: 'Singer Attack',
-    short_name: 'PWA',
-    theme_color: '#ffffff',
+    short_name: 'singer-attack',
+    theme_color: '#000000',
     icons: [
       {
-        src: 'assets/meteorite2.png',
-        sizes: 'any',
-        purpose: 'any',
-        type: "image/svg+xml"
-      },
+        src: "assets/favicon.ico",
+        sizes: "64x64 32x32 24x24 16x16",
+        type: "image/x-icon"
+      }, {
+        src: "assets/android-chrome-192x192.png",
+        type: "image/png",
+        sizes: "192x192"
+      }, {
+        src: "assets/android-chrome-256x256.png",
+        type: "image/png",
+        sizes: "256x256"
+      }
     ],
     display: 'standalone',
   },
