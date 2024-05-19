@@ -6,7 +6,7 @@ President Cress has murdered the several heads of state, and his army is invadin
 
 ### Solider of Euthica
 
-<!-- __ALIGN_RIGHT__ -->
+<!-- AVATAR_ALIGN_RIGHT -->
 
 His army is unbeatable, we are running out of weapons for defence.
 
@@ -20,7 +20,7 @@ Hey, hey, hey. We don't want to kill anyone, we just want to liberate Euthica pe
 
 ### Solider of Euthica
 
-<!-- __ALIGN_RIGHT__ -->
+<!-- AVATAR_ALIGN_RIGHT -->
 
 F... it. Our state could be destroyed with dignity, but not bow before the devil.
 

@@ -75,6 +75,17 @@ export const StoryContextProvider = ({ children }: { children: ReactNode }) => {
               .map((content) =>
                 content.trim().replace(/%SHOT%/gm, `${remainingShots}`)
               )
+              .map((content) => {
+                const match = content.match(/### (.*)/);
+                if (match && charactersMap[match[1]]) {
+                  return (
+                    content +
+                    "\n\n" +
+                    `<!-- AVATAR  /assets/characters/${charactersMap[match[1]]}.png -->`
+                  );
+                }
+                return content;
+              })
               .filter((v) => v),
           }));
         });
@@ -83,7 +94,7 @@ export const StoryContextProvider = ({ children }: { children: ReactNode }) => {
   );
 
   useEffect(() => {
-    if (stageState === "story") {
+    if (!window.location.href.includes("ending")) {
       // not in ending
       fetch(`/assets/dialogues/stage${`${stage + 1}`.padStart(2, "0")}.md`)
         .then((r) => r.text())
@@ -94,6 +105,17 @@ export const StoryContextProvider = ({ children }: { children: ReactNode }) => {
               .map((content) =>
                 content.trim().replace(/%SHOT%/gm, `${remainingShots}`)
               )
+              .map((content) => {
+                const match = content.match(/### (.*)/);
+                if (match && charactersMap[match[1]]) {
+                  return (
+                    content +
+                    "\n\n" +
+                    `<!-- AVATAR  /assets/characters/${charactersMap[match[1]]}.png -->`
+                  );
+                }
+                return content;
+              })
               .filter((v) => v);
             return {
               ...prev,
@@ -106,25 +128,29 @@ export const StoryContextProvider = ({ children }: { children: ReactNode }) => {
   }, [stage, stageState, state.isSecurityLaw, state.is23, remainingShots]);
 
   useEffect(() => {
-    if (remainingShots === 0 && !window.location.pathname.includes("ending")) {
-      if (!isClear) {
-        if (isStarship) {
-          navigate("/ending/new-world");
-          return;
-        }
-      } else {
-        if (stage + 1 === stages.length) {
-          // all clean
-          if (state.isSecurityLaw) {
+    const timer = setTimeout(() => {
+      if (
+        remainingShots === 0 &&
+        !window.location.pathname.includes("ending")
+      ) {
+        if (!isClear) {
+          if (isStarship) {
+            navigate("/ending/new-world");
+            return;
+          }
+        } else {
+          if (stage + 1 === stages.length) {
+            // all clean
             navigate("/ending/loop");
             return;
           }
-          navigate("/ending/good");
-          return;
         }
+        navigate("/ending/destroy");
       }
-      navigate("/ending/destroy");
-    }
+    }, 1000);
+    return () => {
+      clearTimeout(timer);
+    };
   }, [
     remainingShots,
     isStarship,
@@ -174,25 +200,25 @@ const DEFAULT_STATE: StoryContextState = {
 };
 
 export const charactersMap: Record<string, string> = {
-  "Saviour Me": "13",
-  "President Cress": "03",
-  "Commander Corbyn": "07",
-  "Prime Minister of YiiBpun": "10",
-  "Head of AngGritt": "11",
-  "Chairman of Euthica": "02",
-  "Solider of Euthica": "06",
-  "SomChai the Rebel": "08",
-  "Representative of Cress in Euthica": "17",
-  "Spy to Euthica": "16",
-  "Council Leader of the Earth": "12",
-  "Mum the Explorer": "05",
-  "White the Newborn": "09",
-  "Lady the Wiser": "15",
-  "Kid the Euthica": "00",
-  "Helen the Barrister": "18",
-  "Alexandra the Professor": "19",
-  "Ino the Teen": "04",
-  "Jack the Executor": "14",
-  "Langley the Freeman": "21",
-  "Child the Explorer": "20",
+  "Saviour Me": "p13",
+  "President Cress": "p03",
+  "Commander Corbyn": "p07",
+  "Prime Minister of YiiBpun": "p10",
+  "Head of AngGritt": "p11",
+  "Chairman of Euthica": "p02",
+  "Solider of Euthica": "p06",
+  "SomChai the Rebel": "p08",
+  "Representative of Cress in Euthica": "p17",
+  "Spy to Euthica": "p16",
+  "Council Leader of the Earth": "p12",
+  "Mum the Explorer": "p05",
+  "White the Newborn": "p09",
+  "Lady the Wiser": "p15",
+  "Kid the Euthica": "p00",
+  "Helen the Barrister": "p18",
+  "Alexandra the Professor": "p19",
+  "Ino the Teen": "p04",
+  "Jack the Executor": "p14",
+  "Langley the Freeman": "p21",
+  "Child the Explorer": "p20",
 };

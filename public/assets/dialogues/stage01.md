@@ -8,6 +8,6 @@ Shot down the meterorite by the CANNON
 
 ### Saviour Me
 
-<!-- __ALIGN_RIGHT__ -->
+<!-- AVATAR_ALIGN_RIGHT -->
 
 OK, let me take the shoot.

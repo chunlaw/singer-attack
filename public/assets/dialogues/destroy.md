@@ -1,4 +1,4 @@
 ### Saviour Me
-<!-- __ALIGN_RIGHT__ -->
+<!-- AVATAR_ALIGN_RIGHT -->
 
 Failed to shoot down all the meteorite... My poor maths...

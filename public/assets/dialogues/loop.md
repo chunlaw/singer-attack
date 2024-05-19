@@ -5,7 +5,7 @@ There is no starship, and no meteorite. And, we are running out of shots...
 <--->
 
 ### Commander Corbyn
-<!-- __ALIGN_RIGHT__ -->
+<!-- AVATAR_ALIGN_RIGHT -->
 
 Well done. It is all over.
 
@@ -18,7 +18,7 @@ The Earth is under my control now. Let's celebrate my leadership.
 <--->
 
 ### Solider of Euthica
-<!-- __ALIGN_RIGHT__ -->
+<!-- AVATAR_ALIGN_RIGHT -->
 
 Euthica dies with dignity. 
 

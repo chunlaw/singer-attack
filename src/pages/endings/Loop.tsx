@@ -11,12 +11,12 @@ const Loop = () => {
 
   return (
     <Box sx={rootSx}>
-      <Box sx={{ animationDelay: "2400ms", width: "13em", height: "13em" }} />
-      <Box sx={{ animationDelay: "2000ms", width: "11em", height: "11em" }} />
-      <Box sx={{ animationDelay: "1600ms", width: "9em", height: "9em" }} />
-      <Box sx={{ animationDelay: "1200ms", width: "7em", height: "7em" }} />
-      <Box sx={{ animationDelay: "800ms", width: "5em", height: "5em" }} />
-      <Box sx={{ animationDelay: "400ms", width: "3em", height: "3em" }} />
+      <Box sx={{ animationDelay: "900ms", width: "13em", height: "13em" }} />
+      <Box sx={{ animationDelay: "750ms", width: "11em", height: "11em" }} />
+      <Box sx={{ animationDelay: "600ms", width: "9em", height: "9em" }} />
+      <Box sx={{ animationDelay: "450ms", width: "7em", height: "7em" }} />
+      <Box sx={{ animationDelay: "300ms", width: "5em", height: "5em" }} />
+      <Box sx={{ animationDelay: "150ms", width: "3em", height: "3em" }} />
       <Box sx={{ animationDelay: "0s", width: "1em", height: "1em" }} />
     </Box>
   );

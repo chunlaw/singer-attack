@@ -5,6 +5,6 @@ The Earth has never been that secured in the entire history. The improved electo
 <--->
 
 ### Saviour Me
-<!-- __ALIGN_RIGHT__ -->
+<!-- AVATAR_ALIGN_RIGHT -->
 
 Everyone is now working under the commands from President Cress. My routine work is to clean up the meteorites. 

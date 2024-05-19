@@ -1,5 +1,5 @@
 ### White the Newborn
-<!-- __ALIGN_RIGHT__ -->
+<!-- AVATAR_ALIGN_RIGHT -->
 
 I have read the history that we used to live with democracy, the rule of law, and freedom.
 
@@ -12,7 +12,7 @@ Yes, we are still living with them. What's more? The Earth is secured by the Ear
 <--->
 
 ### White the Newborn
-<!-- __ALIGN_RIGHT__ -->
+<!-- AVATAR_ALIGN_RIGHT -->
 
 But, the history says that there is jury system in the court. It is central to a healthy democracy and avoids monopoly over the law.  Where is it now?
 
@@ -31,7 +31,7 @@ Council Leader of the Earth, please legislate a law to censorship the history.
 <--->
 
 ### Council Leader of the Earth
-<!-- __ALIGN_RIGHT__ -->
+<!-- AVATAR_ALIGN_RIGHT -->
 
 Sure, the kids should learn more from the correct history.
 

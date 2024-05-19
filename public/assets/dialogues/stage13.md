@@ -5,6 +5,6 @@ Forget about killing people. If it is your duty, it is nothing about guilty. Cle
 <--->
 
 ### Saviour Me
-<!-- __ALIGN_RIGHT__ -->
+<!-- AVATAR_ALIGN_RIGHT -->
 
 ...

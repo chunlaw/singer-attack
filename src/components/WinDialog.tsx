@@ -28,12 +28,13 @@ const WinDialog = () => {
   const rating = useMemo(() => {
     if (!isClear) return 0;
     const curBest = stageCount[stage];
+    console.log(curBest, stages[stage].ans);
     if (curBest === null) return 0;
 
     if (stages[stage].ans === curBest) {
       return 3;
     }
-    if (stages[stage].ans === curBest + 1) {
+    if (stages[stage].ans + 1 === curBest) {
       return 2;
     }
     if (stages[stage].ans + 2 <= curBest) {

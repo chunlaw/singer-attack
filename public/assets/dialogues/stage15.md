@@ -5,7 +5,7 @@ Kids, living out your true meaning is the secret of life. Don't forget it
 <--->
 
 ### Kid the Euthica
-<!-- __ALIGN_RIGHT__ -->
+<!-- AVATAR_ALIGN_RIGHT -->
 
 President Cress says the secret of life is to worship him, and to behave well. If everyone does it, the meteorite will never come again and we will be safe.
 
@@ -18,7 +18,7 @@ The meteorite is the consequence of attack from Singer. They are alien creatures
 <--->
 
 ### Kid the Euthica
-<!-- __ALIGN_RIGHT__ -->
+<!-- AVATAR_ALIGN_RIGHT -->
 
 It is not the history taught in school. You are a liar. I will behave well under President Cress, and meteorites will never come.
 

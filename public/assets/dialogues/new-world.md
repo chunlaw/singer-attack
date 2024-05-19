@@ -5,7 +5,7 @@ We are safe!!! There is definitely another planet for us...
 <--->
 
 ### Saviour Me
-<!-- __ALIGN_RIGHT__ -->
+<!-- AVATAR_ALIGN_RIGHT -->
 
 Failed to shoot down all the starships... Is it about mercy, or it is about my mathematics? 
 
@@ -18,7 +18,7 @@ Many meteorites are coming.... The scientists lied to me....
 <--->
 
 ### Saviour Me
-<!-- __ALIGN_RIGHT__ -->
+<!-- AVATAR_ALIGN_RIGHT -->
 
 Huh... We have no resource to shot even one more. We will all dies....
 
@@ -31,7 +31,7 @@ It is actually no scientist lied, all scientist are killed by Saviour Me in the 
 <--->
 
 ### Saviour Me
-<!-- __ALIGN_RIGHT__ -->
+<!-- AVATAR_ALIGN_RIGHT -->
 
 F...!
 

@@ -5,14 +5,14 @@ We propose to the council to pass the Earth Security Law to safeguard all people
 <--->
 
 ### Council Leader of the Earth
-<!-- __ALIGN_RIGHT__ -->
+<!-- AVATAR_ALIGN_RIGHT -->
 
 The Earth Security Law is written nicely to safeguard all of us. We will speed up the legislation process.
 
 <--->
 
 ### SomChai the Rebel
-<!-- __ALIGN_RIGHT__ -->
+<!-- AVATAR_ALIGN_RIGHT -->
 
 People, the Devil Cress is going to ruin the Earth. Stand up, and fight!!
 
@@ -27,7 +27,7 @@ Saviour, do you stand by me?
 <--->
 
 ### Saviour Me
-<!-- __ALIGN_RIGHT__ -->
+<!-- AVATAR_ALIGN_RIGHT -->
 <!-- PROMPT securityLaw: Do you support the Earth Security Law? -->
 
 ......

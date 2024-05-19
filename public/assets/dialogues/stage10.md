@@ -1,5 +1,5 @@
 ### Spy to Euthica
-<!-- __ALIGN_RIGHT__ -->
+<!-- AVATAR_ALIGN_RIGHT -->
 
 (...Burn the drawing of President Cress...)
 
@@ -16,7 +16,7 @@ There is a crisis of Euthica, it is now a state of emergency.
 <--->
 
 ### Council Leader of the Earth
-<!-- __ALIGN_RIGHT__ -->
+<!-- AVATAR_ALIGN_RIGHT -->
 
 The Peaceful Treaty is now revoked. President Cress is now legitimate to liberate Euthica.
 

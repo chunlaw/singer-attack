@@ -6,6 +6,6 @@ More meteorites are coming. Try cleaning them with ONE shot!
 
 ### Saviour Me
 
-<!-- __ALIGN_RIGHT__ -->
+<!-- AVATAR_ALIGN_RIGHT -->
 
 OK, let me try.

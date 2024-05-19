@@ -1,5 +1,5 @@
 ### Helen the Barrister
-<!-- __ALIGN_RIGHT__ -->
+<!-- AVATAR_ALIGN_RIGHT -->
 
 I am preparing to the Earth Council election. I will re-establish the Bill of Rights Ordinance to protect the freedom of everyone.
 
@@ -12,7 +12,7 @@ People in the Earth, I would like to sincerely announce that I would participate
 <--->
 
 ### Alexandra the Professor
-<!-- __ALIGN_RIGHT__ -->
+<!-- AVATAR_ALIGN_RIGHT -->
 
 I will call for a government reform when I become the councilor. Cast your vote for supporting the voice of people.
 

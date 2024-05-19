@@ -1,6 +1,6 @@
 ### Solider of Euthica
 
-<!-- __ALIGN_RIGHT__ -->
+<!-- AVATAR_ALIGN_RIGHT -->
 
 Chairman of Euthica, our people are is planning to form a shadow society to preserve our culture. It would be a great support if you could join us?
 

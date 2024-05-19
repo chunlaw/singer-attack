@@ -5,7 +5,7 @@ The Earth is no longer what it was. We should leave now.
 <--->
 
 ### Child the Explorer
-<!-- __ALIGN_RIGHT__ -->
+<!-- AVATAR_ALIGN_RIGHT -->
 
 The Earth is beautiful.
 
@@ -18,7 +18,7 @@ My army, clean the starship. It's all about governance authority. The Earth will
 <--->
 
 ### Saviour Me
-<!-- __ALIGN_RIGHT__ -->
+<!-- AVATAR_ALIGN_RIGHT -->
 
 (No, it is killing people....)
 

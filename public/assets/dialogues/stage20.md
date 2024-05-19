@@ -5,7 +5,7 @@ The Earth is running out of shots. It is our final chance to leave.
 <--->
 
 ### President Cress
-<!-- __ALIGN_RIGHT__ -->
+<!-- AVATAR_ALIGN_RIGHT -->
 
 You, the traitor, I will destroy you.
 
@@ -18,6 +18,6 @@ Saviour, reported by the Scientist, all meteorites are cleaned. Use the shot wis
 <--->
 
 ### Saviour Me
-<!-- __ALIGN_RIGHT__ -->
+<!-- AVATAR_ALIGN_RIGHT -->
 
 (FINAL STAGE) ...

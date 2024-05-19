@@ -1,6 +1,6 @@
 ### Representative of Cress in Euthica
 
-<!-- __ALIGN_RIGHT__ -->
+<!-- AVATAR_ALIGN_RIGHT -->
 
 The Peace Treaty is working well. The children are speaking our language, dressing our clothes, worshiping our leader, and giving up their culture. 
 
