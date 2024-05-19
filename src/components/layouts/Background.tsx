@@ -4,7 +4,7 @@ import { useMatch } from "react-router-dom";
 
 const Background = () => {
   const isNewWorld = useMatch("/ending/new-world");
-  const isDestroyed = useMatch("/ending/new-world");
+  const isDestroyed = useMatch("/ending/destroy");
   const [isHell, setIsHell] = useState<boolean>(false);
 
   const random = useMemo(() => {

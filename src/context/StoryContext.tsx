@@ -29,7 +29,7 @@ interface StoryContextValue extends StoryContextState {
 const StoryContext = React.createContext({} as StoryContextValue);
 
 export const StoryContextProvider = ({ children }: { children: ReactNode }) => {
-  const { stage, stageState, nextStageState, remainingShots } =
+  const { stage, stageState, nextStageState, remainingShots, stageCount } =
     useContext(AppContext);
   const { isClear } = useContext(BoardContext);
   const [state, setState] = useState<StoryContextState>(() => {
@@ -94,7 +94,7 @@ export const StoryContextProvider = ({ children }: { children: ReactNode }) => {
   );
 
   useEffect(() => {
-    if (!window.location.href.includes("ending")) {
+    if (!window.location.href.includes("ending") && stageState === "story") {
       // not in ending
       fetch(`/assets/dialogues/stage${`${stage + 1}`.padStart(2, "0")}.md`)
         .then((r) => r.text())
@@ -139,7 +139,12 @@ export const StoryContextProvider = ({ children }: { children: ReactNode }) => {
             return;
           }
         } else {
-          if (stage + 1 === stages.length) {
+          if (
+            stageCount.reduce(
+              (acc, cur, idx) => acc && cur === stages[idx].ans,
+              true
+            )
+          ) {
             // all clean
             navigate("/ending/loop");
             return;
@@ -157,7 +162,9 @@ export const StoryContextProvider = ({ children }: { children: ReactNode }) => {
     navigate,
     isClear,
     stage,
+    stageState,
     state.isSecurityLaw,
+    stageCount,
   ]);
 
   useEffect(() => {

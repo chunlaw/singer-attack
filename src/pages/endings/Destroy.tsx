@@ -1,15 +1,18 @@
 import { useContext, useEffect, useMemo } from "react";
 import StoryContext from "../../context/StoryContext";
 import { Box } from "@mui/material";
+import AppContext from "../../context/AppContext";
 
 const Destroy = () => {
+  const { goToStage, stage } = useContext(AppContext);
   const { setEndingDialogues } = useContext(StoryContext);
 
   const meteorites = useMemo(() => {
-    return Array(1)
+    goToStage(stage);
+    return Array(10)
       .fill(0)
       .map(() => Math.random() * 120 - 20);
-  }, []);
+  }, [goToStage, stage]);
 
   useEffect(() => {
     setEndingDialogues("/assets/dialogues/destroy.md");

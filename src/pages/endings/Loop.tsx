@@ -1,13 +1,16 @@
 import { useContext, useEffect } from "react";
 import StoryContext from "../../context/StoryContext";
 import { Box, SxProps, Theme } from "@mui/material";
+import AppContext from "../../context/AppContext";
 
 const Loop = () => {
+  const { goToStage, stage } = useContext(AppContext);
   const { setEndingDialogues } = useContext(StoryContext);
 
   useEffect(() => {
+    goToStage(stage);
     setEndingDialogues("/assets/dialogues/loop.md");
-  }, [setEndingDialogues]);
+  }, [setEndingDialogues, goToStage, stage]);
 
   return (
     <Box sx={rootSx}>
